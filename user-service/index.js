@@ -19,6 +19,9 @@ let users = {};
 // Endpoints
 app.post('/users', (req, res) => {
     const { id, name } = req.body;
+    if (!id || !name) {
+        return res.status(400).json({ message: 'User ID and name are required' });
+    }
     if (users[id]) {
         return res.status(400).json({ message: 'User already exists' });
     }
